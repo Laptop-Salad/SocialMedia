@@ -3,8 +3,14 @@ body {
     height: 100vh;
 }
 
+h1, h2, h3 {
+    font-family: "Rubik Mono One", monospace;
+    font-weight: 400;
+    font-style: normal;
+}
+
 .blocky {
-    font-family: "Notable", sans-serif;
+    font-family: "Rubik Mono One", monospace;
     font-weight: 400;
     font-style: normal;
 }
@@ -12,12 +18,21 @@ body {
 .purple-text-gradient {
     background: linear-gradient(to left, #6483F1, #3A4C8B);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
+.linked-grid {
+    grid-template: 1fr / repeat(8, 100vw);
+}
+
+.instagram-grid {
+    grid-template: 1fr / repeat(7, 100vw);
+}
+
 .container {
-    width: 600vw;
+    width: 700vw;
     height: 100%;
     display: grid;
-    grid-template: 1fr / repeat(6, 100vw);
+    grid-template: 1fr / repeat(7, 100vw);
 }

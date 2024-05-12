@@ -2,24 +2,58 @@ document.addEventListener("DOMContentLoaded", (event) => {
     gsap.registerPlugin(ScrollTrigger, TextPlugin)
 });
 
-const tl = gsap.timeline();
+const lenis = new Lenis();
+
+function raf(time) {
+    lenis.raf(time)
+    requestAnimationFrame(raf)
+}
+
+requestAnimationFrame(raf);
+
 let scrollables = gsap.utils.toArray(".container");
 
-scrollables.forEach(scrollable => {
-    const panels = scrollable.querySelectorAll(".panel");
+    scrollables.forEach(scrollable => {
+    let sections = scrollable.querySelectorAll('.panel');
 
-    gsap.to(scrollable, {
-        xPercent: -100 * (panels.length - 1),
+    let tl = gsap.timeline({
         ease: "none",
         scrollTrigger: {
             trigger: scrollable,
             pin: true,
-            scrub: 1,
-            snap: 1 / (panels.length - 1),
-            // base vertical scrolling on how wide the container is so it feels more natural.
-            end: "+=3500",
+            scrub: 3,
+            end: () => "+=" + (scrollable.offsetWidth * sections.length)
         }
-    });
+    })
+
+    tl.to(scrollable, {
+        xPercent: -100 * (sections.length - 1),
+    })
+
+    sections.forEach(section => {
+        // Typewriting
+        const typewriting = section.querySelectorAll(".typewriting")
+
+        typewriting.forEach(typewrite => {
+            ScrollTrigger.create({
+                trigger: typewrite,
+                containerAnimation: tl,
+                onEnter: () => typeWrite(typewrite),
+            })
+        })
+
+        // Checkmarks
+        const checkConts = section.querySelectorAll(".check-container");
+
+        checkConts.forEach(checkCont => {
+            ScrollTrigger.create({
+                trigger: section,
+                containerAnimation: tl,
+                onEnter: () => check(checkCont),
+                onEnterBack: () => check(checkCont),
+            });
+        })
+    })
 })
 
 // ** Increase numbers **
@@ -39,10 +73,7 @@ increaseNum.forEach(num => {
     });
 })
 
-// Typewriting
-const typewriting = document.querySelectorAll(".typewriting");
-
-typewriting.forEach(element => {
+function typeWrite(element) {
     let text = element.textContent; // store text content
     element.textContent = ''; // clear on element
     let i = 0;
@@ -57,22 +88,26 @@ typewriting.forEach(element => {
             setTimeout(typeWriter, 100);
         }
     }
+
     typeWriter();
-});
+}
 
-// Float to top
-const floatToTop = document.querySelectorAll(".float-to-top");
+function check(checkCont) {
+    let checks = checkCont.querySelectorAll('.check');
+    let i = 0;
 
-floatToTop.forEach(float => {
-    gsap.from(float, {
-        scrollTrigger: {
-            trigger: float,
-        },
-        y: 400,
-        top: 0,
-        opacity: 0,
-        duration: 4,
-        ease: Power1.easeIn,
-        stagger: 0,
-    });
-})
+    const checker = () => {
+        if (i >= checks.length) {
+            return;
+        }
+
+        checks[i].classList.add('fa-solid');
+        checks[i].classList.add('fa-check');
+
+        i += 1;
+
+        setTimeout(checker, 200);
+    }
+
+    checker()
+}
