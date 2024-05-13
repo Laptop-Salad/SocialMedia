@@ -111,3 +111,16 @@ function check(checkCont) {
 
     checker()
 }
+
+gsap.utils.toArray(".reveal").forEach(element => {
+    gsap.from(element, {
+        opacity: 0,
+        yPercent: 100,
+        duration: 1,
+        ease: "none",
+        scrollTrigger: {
+            trigger: element,
+            toggleActions: "play reverse play reverse"
+        }
+    })
+});

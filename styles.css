@@ -23,11 +23,18 @@ h1, h2, h3 {
 }
 
 .linked-grid {
+    width: 800vw;
     grid-template: 1fr / repeat(8, 100vw);
 }
 
 .instagram-grid {
+    width: 700vw;
     grid-template: 1fr / repeat(7, 100vw);
+}
+
+.reddit-grid {
+    width: 800vw;
+    grid-template: 1fr / repeat(8, 100vw);
 }
 
 .container {
