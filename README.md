@@ -1,5 +1,5 @@
 # SocialMedia
-This is a college project. We had to write about social media channels, its theats and ethical and legal implications. I wanted to create a report in a more interactive way that will engage the user. However, I had two things against me: Not being very good at design and having a limited timeframe of only a few days.
+This is a college project. We had to write about social media channels, its theats and ethical and legal implications. I wanted to create a report in a more interactive way that will engage the user. However, I had two things against me: Not being a lot of experience with projects that focused heavily on design and having a limited timeframe of only a few days.
 
 Built with: HTML, CSS, JS, Tailwind, GSAP
 
